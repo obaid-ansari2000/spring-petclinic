@@ -1,0 +1,17 @@
+pipeline {
+ agent any
+ stages{
+    stage('git') {
+        steps{
+        git branch: "main",
+        url: 'https://github.com/obaid-ansari2000/spring-petclinic.git'              
+    }
+    }
+    stage ('shell'){
+        steps{
+            sh 'docker --version'
+            sh 'docker image build -t spc:5.0'
+            sh 'docker conatainer run -d --name trail15 -p spc:5.0'
+        }
+    }
+ }
